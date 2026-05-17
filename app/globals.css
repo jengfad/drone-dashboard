@@ -1,13 +1,38 @@
 @import "tailwindcss";
 
-@theme {
-  --color-card: #151929;
-  --color-green: #22C55E;
-  --color-red: #EF4444;
+/* Class-based dark mode — toggled by adding/removing .dark on <html> */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Light theme (default) */
+:root {
+  --bg: #F0F4F8;
+  --bg-card: #FFFFFF;
+  --bg-hover: #E2E8F0;
+  --text-primary: #0F172A;
+  --text-secondary: #64748B;
+  --track: #CBD5E1;
 }
 
-html,
+/* Dark theme */
+.dark {
+  --bg: #0D0F1E;
+  --bg-card: #151929;
+  --bg-hover: #1B2236;
+  --text-primary: #FFFFFF;
+  --text-secondary: #6B7280;
+  --track: #1E293B;
+}
+
+/* Expose CSS variables as Tailwind color utilities */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-card: var(--bg-card);
+  --color-primary: var(--text-primary);
+  --color-secondary: var(--text-secondary);
+}
+
 body {
-  background-color: #0d0f1e;
-  color: #ffffff;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
